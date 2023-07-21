@@ -30,7 +30,7 @@
         <p id="feedback" class="text-danger fw-bold"></p>
 
         <label class="my-2 fw-bold" for="websiteurl"><i class="fa-solid fa-link pe-2"></i> Site URL</label>
-        <input type="text" id="websiteurl" class="form-control " placeholder="Website URL">
+        <input type="url" id="websiteurl" class="form-control " placeholder="Website URL">
 
         <dialog class="border-0 rounded-2 py-2 px-4 " id="favDialog">
        <div class="d-flex justify-content-between my-4">
@@ -55,8 +55,20 @@
     </div>
 
     <div class="container">
-        
-<table class="table mt-4 text-center bg-light">
+        <div class="container h-100">
+            <div class="d-flex justify-content-center h-100">
+              <div class="searchbar">
+                <input class="search_input text-white" type="text"  id="search" onkeyup="searchFun(this)" placeholder="Search...">
+                <a onclick="event.preventDefault();" class="search_icon"><i class="fas fa-search"></i></a>
+              </div>
+            </div>
+          </div>
+        <!-- <div class="form-group has-search">
+        <span class="fa fa-search form-control-feedback"></span>
+        <input type="text" placeholder="Search" class="form-control my-5 " id="search" onkeyup="searchFun(this)">    
+        </div> -->
+
+        <table class="table mt-4 text-center bg-light">
     <thead>
         <th>Index</th>
         <th>Website Name</th>

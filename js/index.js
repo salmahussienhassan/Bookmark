@@ -10,7 +10,7 @@ var siteList;
 if(JSON.parse(localStorage.getItem('test'))!==null)
 {
  siteList=JSON.parse(localStorage.getItem('test')) ;
- display();
+ display(siteList);
 }
 else
 {
@@ -52,7 +52,7 @@ function addSite(){
     siteList.push(site);
     localStorage.setItem('test',JSON.stringify(siteList));
     clearForm();
-    display();
+    display(siteList);
 }
 else{
     notVaild();
@@ -62,14 +62,17 @@ else{
 
 
 
-function display(){
+function display(listArray){
     var box='';
-    for(var i=0;i<siteList.length;i++){
+   
+    for(var i=0;i<listArray.length;i++){
+   
         box+=`<tr>
         <td>${i+1}</td>
-        <td>${siteList[i].site_name}</td>
+        <td class="hightlight">${listArray[i].site_name}</td>
+        
 
-        <td><a target="_blank"  href="${siteList[i].site_url}"  class="btn btn-success"> <i class="fa-solid fa-eye"></i> Visit</a></td>
+        <td><a target="_blank"  href="${listArray[i].site_url}"  class="btn btn-success"> <i class="fa-solid fa-eye"></i> Visit</a></td>
         <td><button onclick="deleteSite(${i});" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Delete</button></td>
     </tr>`
    
@@ -88,7 +91,7 @@ function clearForm(){
 function deleteSite(index){
     siteList.splice(index,1);
     localStorage.setItem('test',JSON.stringify(siteList));
-    display();
+    display(siteList);
 }
 function nameRegex(){
     var regex=/^[a-zA-Z][_a-zA-Z0-9]{1,61}[a-zA-Z0-9]$|^[_]{1,2}$/;
@@ -127,4 +130,16 @@ siteName.addEventListener("input", function () {
       element.classList.remove("is-valid");
     }
   }
-  
+  function searchFun(ele) {
+    var searchedArr = []
+    for (var i = 0; i < siteList.length; i++) {
+        if (siteList[i].site_name.toLowerCase().includes(ele.value.toLowerCase())) {
+            searchedArr.push(siteList[i])
+        }
+    }
+    display(searchedArr)
+    var hightlight = document.getElementsByClassName('hightlight')
+    for (var i = 0; i < hightlight.length; i++) {
+        hightlight[i].innerHTML = hightlight[i].innerHTML.replace(new RegExp(ele.value, 'gi'), `<span>${ele.value}</span>`)
+    }
+}
